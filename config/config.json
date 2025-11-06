@@ -1,0 +1,7 @@
+{
+  "environments" : {
+    "DEV": {
+      "url": "http://www.automationpractice.pl/index.php?"
+    }
+  }
+}

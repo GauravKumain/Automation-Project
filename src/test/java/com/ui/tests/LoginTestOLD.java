@@ -1,11 +1,9 @@
 package com.ui.tests;
 
-import com.utility.BrowserUtility;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LoginTest {
+public class LoginTestOLD {
     public static void main(String[] args) {
 
 
