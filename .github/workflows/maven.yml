@@ -16,12 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # --- Create folders required by tests ---
+      # ---------- Ensure required folders exist ----------
       - name: Create required directories
         run: |
           mkdir -p screenshots
           mkdir -p logs
+          mkdir -p public/extent-reports/screenshots
 
+      # ---------- Set up Java ----------
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -29,10 +31,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      # ---------- Run Tests ----------
       - name: Run Automation Tests
         run: mvn test -X -Dbrowser=chrome -DisLambdaTest=true -DisHeadless=true
 
-      # -------- Upload Logs --------
+      # ---------- Upload Logs ----------
       - name: Upload Test Logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -40,18 +43,36 @@ jobs:
           name: test-logs
           path: logs/
 
-      # -------- Upload Screenshots --------
+      # ---------- Upload Screenshots ----------
       - name: Upload Screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: ./screenshots/**
+          path: screenshots/
 
-      # -------- Upload Report --------
+      # ---------- Upload Extent Report ----------
       - name: Upload Test Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: extent-report
-          path: ./**/report.html
+          path: report.html
+
+      # ---------- Copy files to GH Pages folder ----------
+      - name: Copy Report and Screenshots for GitHub Pages
+        if: always()
+        run: |
+          mkdir -p public/extent-reports/screenshots
+          cp report.html public/extent-reports/
+          cp -R screenshots/* public/extent-reports/screenshots/ || echo "No screenshots found"
+          ls -R public/extent-reports
+
+      # ---------- Deploy to GH Pages ----------
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4.7.4
+        with:
+          folder: public/extent-reports/
+          token: ${{ secrets.PAT1234 }}
+          clean: true
