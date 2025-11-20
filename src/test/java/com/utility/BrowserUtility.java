@@ -104,19 +104,26 @@ public abstract class BrowserUtility {
     public String takeScreenShot(String name) {
         TakesScreenshot screenshot = (TakesScreenshot) driver.get();
         File screenShotData = screenshot.getScreenshotAs(OutputType.FILE);
+
+        String directory = "screenshots";
+        File dir = new File(directory);
+        if (!dir.exists()) {
+            dir.mkdir(); // important for GitHub Actions!
+        }
+
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH-mm-ss");
         String timeStamp = simpleDateFormat.format(date);
-        String path = "./screenshots/" + name + " - " + timeStamp+ ".png";
+        String path = directory + "/" + name + " - " + timeStamp + ".png";
+
         File screenShotFile = new File(path);
         try {
             FileUtils.copyFile(screenShotData, screenShotFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return path;
-
     }
 
 }
