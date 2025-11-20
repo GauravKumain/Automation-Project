@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: screenshots/
+          path: ./screenshots/**
 
       # -------- Upload Report --------
       - name: Upload Test Report
@@ -54,3 +54,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extent-report
+          path: ./**/report.html
