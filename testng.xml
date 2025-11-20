@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false" thread-count="8">
+    <test name="Tests">
+        <parameter name="browser" value="${browser}" />
+        <parameter name="isLambdaTest" value="${isLambdaTest}" />
+        <parameter name="isHeadless" value="${isHeadless}" />
+        <classes>
+            <class name="com.ui.tests.LoginTest3"/>
+        </classes>
+    </test>
+</suite>
