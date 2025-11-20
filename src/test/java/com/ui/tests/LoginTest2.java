@@ -10,13 +10,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static com.constants.Browser.CHROME;
 
 public class LoginTest2 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
 
         //WebDriver wd = new ChromeDriver();//launch a browser window.
-        HomePage homePage = new HomePage(CHROME);
-        LoginPage loginPage =homePage.goToLoginpage();
-        loginPage.dologinWith("kisabam968@dropeso.com","Password");
+        //HomePage homePage = new HomePage(CHROME);
+        //LoginPage loginPage =homePage.goToLoginpage();
+        //loginPage.dologinWith("kisabam968@dropeso.com","Password");
 
 
 

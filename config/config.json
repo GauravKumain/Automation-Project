@@ -1,6 +1,6 @@
 {
   "environments" : {
-    "DEV": {
+    "QA": {
       "url": "http://www.automationpractice.pl/index.php?"
     }
   }
